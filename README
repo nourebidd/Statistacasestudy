@@ -1,0 +1,62 @@
+ Statista Case Study – Data Extraction & Financial Dataset Preparation
+
+This repository contains my solution for the Statista Working Student – Data Engineering** case study.  
+The task was to extract company data from a publicly available source, clean it, merge multi-year financials, and produce a structured dataset including at least 100 companies.
+1//
+ Dataset Source
+
+I used the Forbes Global 2000** datasets for the years:
+
+- **2020**
+- **2021**
+- **2022**
+
+These datasets are publicly available from Kaggle and other Forbes archival sources.
+
+Each dataset provides:
+
+- Company Name  
+- Country  
+- Industry  
+- Revenue (Sales)  
+- Net Income  
+- Assets  
+- Market Value  
+
+This makes it suitable for building a multi-year financial dataset.
+2//
+
+Approach & Methodology
+
+ Data Loading:
+
+All three Excel datasets were loaded using:
+
+python
+pd.read_excel()
+                         Standardizing Column Names
+Before merging, the financial columns from each year were renamed:
+Sales → rev_YYYY
+Profits → net_income_YYYY
+Assets → assets_YYYY
+Market_Value → market_cap_YYYY
+This  ensures consistent naming across all years.
+                         Merging the Datasets
+All datasets were merged using:
+merge(..., on=["company", "country", "industry"], how="outer")
+This keeps all companies that appear in any of the three years.
+                         Preparing the Final Dataset
+The final dataset includes:
+Company
+Country
+Industry
+Revenue for 2020–2022
+Net Income for 2020–2022
+Assets for 2020–2022
+Market Cap for 2020–2022
+Revenue Unit (USD)
+I selected the top 300 companies alphabetically to stay within the required range (100–500).
+The cleaned dataset is exported as:
+forbes_financials_2020_2022_cleaned.csv
+for any questions you can kindly contact me via Email: ebidnour5@gmail.com
+
